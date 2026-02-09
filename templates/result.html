@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Booked - Sona College</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #fff 0%, #fff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            background: linear-gradient(180deg, #fff 0%, #fff 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 720px;
+            padding: 36px;
+            text-align: center;
+            animation: popIn 0.45s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(255,165,0,0.12);
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            font-size: 72px;
+            margin-bottom: 12px;
+            animation: bounce 0.6s ease-out;
+            color: #ff7a00;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .slot-container {
+            position: relative;
+            color: white;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 8px 30px rgba(255,122,0,0.12);
+            overflow: hidden;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ff8a00;
+            background-image: url('/static/images/image1.svg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slot-container::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 100%);
+            pointer-events: none;
+        }
+        .slot-container .slot-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slot-label {
+            font-size: 14px;
+            opacity: 0.95;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slot-number {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+        }
+
+        .message {
+            font-size: 16px;
+            color: #666;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .details {
+            background: #fff7f0;
+            border-left: 4px solid #ff8a00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 18px 0;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .details p {
+            margin: 8px 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        a {
+            flex: 1;
+            display: inline-block;
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, #ff8a00 0%, #ff6a00 100%);
+            color: white;
+            box-shadow: 0 6px 18px rgba(255,138,0,0.28);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-print {
+            background: #e0e0e0;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-print:hover {
+            background: #d0d0d0;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 18px;
+            font-size: 12px;
+            color: #777;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,138,0,0.08);
+        }
+
+        .college-name {
+            color: #ff7a00;
+            font-weight: 700;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .success-icon {
+                font-size: 60px;
+            }
+
+            .slot-number {
+                font-size: 48px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h2>Parking Slot Booked!</h2>
+        
+        <div class="slot-container">
+            <!-- logo removed as requested -->
+            <div class="slot-content">
+                <div class="slot-label">Your Slot Number</div>
+                <div class="slot-number">{{ slot }}</div>
+                {% if note %}
+                    <div style="margin-top:12px; color: rgba(255,255,255,0.95); font-weight:600; font-size:13px;">Note: {{ note }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <p class="message">
+            Your parking slot has been successfully reserved at <span class="college-name">Sona College of Arts and Science</span>.
+        </p>
+
+        <div class="details">
+            <p><strong>📍 Location:</strong> Campus Parking Zone</p>
+            <p><strong>🚗 Vehicle:</strong> Ready for parking</p>
+            <p><strong>⏰ Valid Until:</strong> 5:00 PM Today</p>
+            <p><strong>📅 Status:</strong> Active & Confirmed</p>
+        </div>
+
+        <div class="button-group">
+            <a href="/" class="btn-home">🏠 Book Another Slot</a>
+            <button class="btn-print" onclick="window.print()">🖨️ Print</button>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for using <span class="college-name">Sona College Smart Parking System</span></p>
+        </div>
+    </div>
+</body>
+</html>
